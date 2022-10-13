@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option go_package = "./pb";
+
+package pb;
+
+
+//model
+message GetMsgCodeReq {
+    string msgType = 1;
+    string phoneNum = 2;
+}
+
+message GetMsgCodeResp {
+    string msgCode = 1;
+}
+
+//service
+service sms {
+    rpc getMsgCode(GetMsgCodeReq) returns(GetMsgCodeResp);
+}

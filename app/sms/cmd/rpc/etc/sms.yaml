@@ -1,0 +1,20 @@
+Name: sms.rpc
+ListenOn: 127.0.0.1:8081
+Etcd:
+  Hosts:
+  - 127.0.0.1:2379
+  Key: sms.rpc
+SmsConfig:
+  Secret:
+    SecretId: ""
+    SecretKey: ""
+  SmsSdkAppId: "1400748696" #应用id
+  SignName: 凌逸极客  #申请的签名
+  TemplateIds:  #模板iI
+    Login: "1570629" #登陆
+    Register: "1570632" #注册
+    ChangePwd: "1570634" #修改密码
+Redis:
+  Host: 127.0.0.1:6379
+  Type: node
+  Pass: oysterredis

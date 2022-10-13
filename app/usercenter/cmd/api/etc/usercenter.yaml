@@ -1,0 +1,29 @@
+Name: usercenter
+Host: 0.0.0.0
+Port: 18888
+
+#jwtAuth
+JwtAuth:
+  AccessSecret: ae0536f9-6450-4606-8e13-5a19ed505da0
+
+  #rpc service
+UsercenterRpcConf:
+   Etcd:
+      Hosts:
+      - 127.0.0.1:2379
+      Key: usercenter.rpc
+
+SmsRpcConf:
+   Etcd:
+      Hosts:
+      - 127.0.0.1:2379
+      Key: sms.rpc
+
+Log:
+  ServiceName: usercenter-api
+  Level: error
+
+#WxMiniConf
+WxMiniConf:
+  AppId: wx2add729fadddddd
+  Secret: 20365395b3de9b2a9351ddddddd

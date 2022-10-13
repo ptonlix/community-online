@@ -1,0 +1,69 @@
+syntax = "v1"
+
+info(
+	title: "用户中心服务"
+	desc: "用户中心服务"
+	author: "GoGeekBaird"
+	email: "gogeek2022@163.com"
+	version: "v1"
+)
+
+import (
+	"user/user.api"
+)
+
+//============================> usercenter v1 <============================
+//no need login
+@server(
+	prefix: usercenter/v1
+	group: usercenter
+)
+service usercenter {
+	
+	@doc(
+		summary: "register"
+	)
+	@handler register
+	post /user/register (RegisterReq) returns (RegisterResp)
+	
+	@doc(
+		summary: "login"
+	)
+	@handler login
+	post /user/login (LoginReq) returns (LoginResp)
+	
+	@doc(
+		summary: "wechat mini auth"
+	)
+	@handler wxMiniAuth
+	post /user/wxmini-auth (WXMiniAuthReq) returns (WXMiniAuthResp)
+	
+	@doc(
+		summary: "get message code"
+	)
+	@handler messagecode
+	post /user/messagecode (MsgCodeReq)
+	
+	@doc(
+		summary: "mobile code login"
+	)
+	@handler msgLogin
+	post /user/msg-login(MsgLoginReq) returns(MsgLoginResp)
+	
+}
+
+//need login
+@server(
+	prefix: usercenter/v1
+	group: usercenter
+	jwt: JwtAuth
+)
+service usercenter {
+	
+	@doc(
+		summary: "get user info"
+	)
+	@handler detail
+	post /user/detail (UserInfoReq) returns (UserInfoResp)
+	
+}
