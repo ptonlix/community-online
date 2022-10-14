@@ -17,7 +17,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 )
 
-var ErrUserAlreadyRegisterError = xerr.NewErrMsg("用户已经注册")
+var ErrUserAlreadyRegisterError = xerr.NewErrCode(xerr.USER_ALREADY_REGISTER_ERROR)
 
 type RegisterLogic struct {
 	ctx    context.Context
@@ -40,7 +40,7 @@ func (l *RegisterLogic) Register(in *pb.RegisterReq) (*pb.RegisterResp, error) {
 		return nil, errors.Wrapf(xerr.NewErrCode(xerr.DB_ERROR), "根据手机号查询短信验证码失败，mobile:%s,err:%v", in.Mobile, err)
 	}
 	if redisCode != in.MsgCode {
-		return nil, errors.Wrapf(xerr.NewErrCode(xerr.DB_ERROR), "短信验证码失败，mobile:%s,redisCode:%v, inputCode:%v", in.Mobile, redisCode, in.MsgCode)
+		return nil, errors.Wrapf(xerr.NewErrCode(xerr.USER_MESSAGE_ERROR), "短信验证码失败，mobile:%s,redisCode:%v, inputCode:%v", in.Mobile, redisCode, in.MsgCode)
 	}
 	// 删除验证码
 	l.svcCtx.RedisClient.DelCtx(l.ctx, fmt.Sprintf(globalkey.CacheSmsPhoneKey, globalkey.SmsLogin, in.Mobile))

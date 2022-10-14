@@ -43,6 +43,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/user/verfy-captcha",
 				Handler: usercenter.VerfyCaptchaHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/user/change-pwd",
+				Handler: usercenter.ChangePwdHandler(serverCtx),
+			},
 		},
 		rest.WithPrefix("/usercenter/v1"),
 	)
@@ -50,7 +55,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	server.AddRoutes(
 		[]rest.Route{
 			{
-				Method:  http.MethodPost,
+				Method:  http.MethodGet,
 				Path:    "/user/detail",
 				Handler: usercenter.DetailHandler(serverCtx),
 			},

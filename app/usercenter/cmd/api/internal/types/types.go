@@ -87,3 +87,9 @@ type VerfyCaptchaReq struct {
 type VerfyCaptchaResp struct {
 	Result bool `json:"result"`
 }
+
+type ChangePwdReq struct {
+	Mobile      string `json:"mobile"`
+	Msgcode     string `json:"msgcode"`
+	NewPassword string `json:"newPassword"`
+}

@@ -56,6 +56,12 @@ service usercenter {
 	@handler verfyCaptcha
 	post /user/verfy-captcha(VerfyCaptchaReq) returns(VerfyCaptchaResp)
 	
+	@doc(
+		summary: "change password"
+	)
+	@handler changePwd
+	post /user/change-pwd(ChangePwdReq)
+	
 }
 
 //need login
@@ -70,6 +76,6 @@ service usercenter {
 		summary: "get user info"
 	)
 	@handler detail
-	post /user/detail (UserInfoReq) returns (UserInfoResp)
+	get /user/detail returns (UserInfoResp)
 	
 }

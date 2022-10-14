@@ -13,6 +13,8 @@ import (
 )
 
 type (
+	ChangePwdReq             = pb.ChangePwdReq
+	ChangePwdResp            = pb.ChangePwdResp
 	GenerateTokenReq         = pb.GenerateTokenReq
 	GenerateTokenResp        = pb.GenerateTokenResp
 	GetCaptchaReq            = pb.GetCaptchaReq
@@ -44,6 +46,7 @@ type (
 		GenerateToken(ctx context.Context, in *GenerateTokenReq, opts ...grpc.CallOption) (*GenerateTokenResp, error)
 		GetCaptcha(ctx context.Context, in *GetCaptchaReq, opts ...grpc.CallOption) (*GetCaptchaResp, error)
 		VerfyCaptcha(ctx context.Context, in *VerfyCaptchaReq, opts ...grpc.CallOption) (*VerfyCaptchaResp, error)
+		ChanegPwd(ctx context.Context, in *ChangePwdReq, opts ...grpc.CallOption) (*ChangePwdResp, error)
 	}
 
 	defaultUsercenter struct {
@@ -100,4 +103,9 @@ func (m *defaultUsercenter) GetCaptcha(ctx context.Context, in *GetCaptchaReq, o
 func (m *defaultUsercenter) VerfyCaptcha(ctx context.Context, in *VerfyCaptchaReq, opts ...grpc.CallOption) (*VerfyCaptchaResp, error) {
 	client := pb.NewUsercenterClient(m.cli.Conn())
 	return client.VerfyCaptcha(ctx, in, opts...)
+}
+
+func (m *defaultUsercenter) ChanegPwd(ctx context.Context, in *ChangePwdReq, opts ...grpc.CallOption) (*ChangePwdResp, error) {
+	client := pb.NewUsercenterClient(m.cli.Conn())
+	return client.ChanegPwd(ctx, in, opts...)
 }

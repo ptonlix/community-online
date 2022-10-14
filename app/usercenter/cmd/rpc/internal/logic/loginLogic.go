@@ -22,8 +22,8 @@ type LoginLogic struct {
 	logx.Logger
 }
 
-var ErrGenerateTokenError = xerr.NewErrMsg("生成token失败")
-var ErrUsernamePwdError = xerr.NewErrMsg("账号或密码不正确")
+var ErrGenerateTokenError = xerr.NewErrCode(xerr.TOKEN_GENERATE_ERROR)
+var ErrUsernamePwdError = xerr.NewErrCode(xerr.USER_LOGIN_VERIFY_ERROR)
 
 func NewLoginLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LoginLogic {
 	return &LoginLogic{
@@ -52,7 +52,7 @@ func (l *LoginLogic) loginByMobile(mobile, password string) (*pb.LoginResp, erro
 		return nil, errors.Wrapf(xerr.NewErrCode(xerr.DB_ERROR), "根据手机号查询用户信息失败，mobile:%s,err:%v", mobile, err)
 	}
 	if user == nil {
-		return nil, errors.Wrapf(ErrUserNoExistsError, "mobile:%s", mobile)
+		return nil, errors.Wrapf(ErrUsernamePwdError, "mobile:%s", mobile)
 	}
 
 	if !(tool.Md5ByString(password) == user.Password) {
@@ -84,6 +84,8 @@ func (l *LoginLogic) loginByMessage(mobile, code string) (*pb.LoginResp, error) 
 	if redisCode != code {
 		return nil, errors.Wrapf(xerr.NewErrCode(xerr.DB_ERROR), "短信验证码失败，mobile:%s,redisCode:%v, inputCode:%v", mobile, redisCode, code)
 	}
+	// 删除验证码
+	l.svcCtx.RedisClient.DelCtx(l.ctx, fmt.Sprintf(globalkey.CacheSmsPhoneKey, globalkey.SmsLogin, mobile))
 	// 检测是否已注册
 	user, err := l.svcCtx.UserModel.FindOneByMobile(l.ctx, mobile)
 	if err != nil && err != model.ErrNotFound {
@@ -116,8 +118,6 @@ func (l *LoginLogic) loginByMessage(mobile, code string) (*pb.LoginResp, error) 
 	if err != nil {
 		return nil, errors.Wrapf(ErrGenerateTokenError, "GenerateToken userId : %d", user.Id)
 	}
-	// 删除验证码
-	l.svcCtx.RedisClient.DelCtx(l.ctx, fmt.Sprintf(globalkey.CacheSmsPhoneKey, globalkey.SmsLogin, mobile))
 
 	return &usercenter.LoginResp{
 		AccessToken:  tokenResp.AccessToken,

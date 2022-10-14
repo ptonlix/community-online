@@ -14,6 +14,8 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
+var CaptchaGenerateError = xerr.NewErrCode(xerr.CAPTCHA_GENERATE_ERROR)
+
 type GetCaptchaLogic struct {
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
@@ -36,17 +38,17 @@ func (l *GetCaptchaLogic) GetCaptcha(in *pb.GetCaptchaReq) (*pb.GetCaptchaResp, 
 	// Generate Captcha
 	dots, b64, tb64, key, err := capt.Generate()
 	if err != nil {
-		return nil, errors.Wrapf(xerr.NewErrMsg("get captcha fail"), "err : %v ", err)
+		return nil, errors.Wrapf(CaptchaGenerateError, "err : %v ", err)
 	}
 	logx.Infof("Get Captcha Key: %s, Dots: %v", key, dots)
 	// 缓存数据
 	jsonDots, err := json.Marshal(dots)
 	if err != nil {
-		return nil, errors.Wrapf(xerr.NewErrMsg("get captcha fail"), "err : %v ", err)
+		return nil, errors.Wrapf(CaptchaGenerateError, "err : %v ", err)
 	}
 	err = l.svcCtx.RedisClient.SetexCtx(l.ctx, key, string(jsonDots), globalkey.CacheCaptchaKeyExp)
 	if err != nil {
-		return nil, errors.Wrapf(xerr.NewErrMsg("get captcha fail"), "err : %v ", err)
+		return nil, errors.Wrapf(CaptchaGenerateError, "err : %v ", err)
 	}
 	return &pb.GetCaptchaResp{
 		ImageBase64: b64,

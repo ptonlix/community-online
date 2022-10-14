@@ -66,3 +66,8 @@ func (s *UsercenterServer) VerfyCaptcha(ctx context.Context, in *pb.VerfyCaptcha
 	l := logic.NewVerfyCaptchaLogic(ctx, s.svcCtx)
 	return l.VerfyCaptcha(in)
 }
+
+func (s *UsercenterServer) ChanegPwd(ctx context.Context, in *pb.ChangePwdReq) (*pb.ChangePwdResp, error) {
+	l := logic.NewChanegPwdLogic(ctx, s.svcCtx)
+	return l.ChanegPwd(in)
+}

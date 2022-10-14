@@ -31,6 +31,7 @@ type UsercenterClient interface {
 	GenerateToken(ctx context.Context, in *GenerateTokenReq, opts ...grpc.CallOption) (*GenerateTokenResp, error)
 	GetCaptcha(ctx context.Context, in *GetCaptchaReq, opts ...grpc.CallOption) (*GetCaptchaResp, error)
 	VerfyCaptcha(ctx context.Context, in *VerfyCaptchaReq, opts ...grpc.CallOption) (*VerfyCaptchaResp, error)
+	ChanegPwd(ctx context.Context, in *ChangePwdReq, opts ...grpc.CallOption) (*ChangePwdResp, error)
 }
 
 type usercenterClient struct {
@@ -122,6 +123,15 @@ func (c *usercenterClient) VerfyCaptcha(ctx context.Context, in *VerfyCaptchaReq
 	return out, nil
 }
 
+func (c *usercenterClient) ChanegPwd(ctx context.Context, in *ChangePwdReq, opts ...grpc.CallOption) (*ChangePwdResp, error) {
+	out := new(ChangePwdResp)
+	err := c.cc.Invoke(ctx, "/pb.usercenter/ChanegPwd", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UsercenterServer is the server API for Usercenter service.
 // All implementations must embed UnimplementedUsercenterServer
 // for forward compatibility
@@ -135,6 +145,7 @@ type UsercenterServer interface {
 	GenerateToken(context.Context, *GenerateTokenReq) (*GenerateTokenResp, error)
 	GetCaptcha(context.Context, *GetCaptchaReq) (*GetCaptchaResp, error)
 	VerfyCaptcha(context.Context, *VerfyCaptchaReq) (*VerfyCaptchaResp, error)
+	ChanegPwd(context.Context, *ChangePwdReq) (*ChangePwdResp, error)
 	mustEmbedUnimplementedUsercenterServer()
 }
 
@@ -168,6 +179,9 @@ func (UnimplementedUsercenterServer) GetCaptcha(context.Context, *GetCaptchaReq)
 }
 func (UnimplementedUsercenterServer) VerfyCaptcha(context.Context, *VerfyCaptchaReq) (*VerfyCaptchaResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method VerfyCaptcha not implemented")
+}
+func (UnimplementedUsercenterServer) ChanegPwd(context.Context, *ChangePwdReq) (*ChangePwdResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ChanegPwd not implemented")
 }
 func (UnimplementedUsercenterServer) mustEmbedUnimplementedUsercenterServer() {}
 
@@ -344,6 +358,24 @@ func _Usercenter_VerfyCaptcha_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Usercenter_ChanegPwd_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ChangePwdReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UsercenterServer).ChanegPwd(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.usercenter/ChanegPwd",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UsercenterServer).ChanegPwd(ctx, req.(*ChangePwdReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Usercenter_ServiceDesc is the grpc.ServiceDesc for Usercenter service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -386,6 +418,10 @@ var Usercenter_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "VerfyCaptcha",
 			Handler:    _Usercenter_VerfyCaptcha_Handler,
+		},
+		{
+			MethodName: "ChanegPwd",
+			Handler:    _Usercenter_ChanegPwd_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

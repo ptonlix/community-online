@@ -24,7 +24,6 @@ func NewLogoutLogic(ctx context.Context, svcCtx *svc.ServiceContext) *LogoutLogi
 }
 
 func (l *LogoutLogic) Logout(in *pb.LogoutReq) (*pb.LogoutResp, error) {
-	// todo: add your logic here and delete this line
 
 	return &pb.LogoutResp{}, nil
 }

@@ -20,7 +20,7 @@ type GetUserInfoLogic struct {
 	logx.Logger
 }
 
-var ErrUserNoExistsError = xerr.NewErrMsg("用户不存在")
+var ErrUserNoExistsError = xerr.NewErrCode(xerr.USER_NOT_EXIST_ERROR)
 
 func NewGetUserInfoLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetUserInfoLogic {
 	return &GetUserInfoLogic{

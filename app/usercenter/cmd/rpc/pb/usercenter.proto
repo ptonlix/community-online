@@ -104,6 +104,14 @@ message VerfyCaptchaResp {
   bool result = 1;
 }
 
+message ChangePwdReq {
+    string mobile = 1;
+    string msgcode = 2; 
+    string newPassword = 3;
+}
+message ChangePwdResp {
+
+}
 //service
 service usercenter {
   rpc login(LoginReq) returns(LoginResp);
@@ -115,4 +123,5 @@ service usercenter {
   rpc generateToken(GenerateTokenReq) returns(GenerateTokenResp);
   rpc GetCaptcha(GetCaptchaReq) returns(GetCaptchaResp);
   rpc VerfyCaptcha(VerfyCaptchaReq) returns(VerfyCaptchaResp);
+  rpc ChanegPwd(ChangePwdReq) returns(ChangePwdResp);
 }

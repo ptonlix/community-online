@@ -103,3 +103,11 @@ type (
 		Result bool `json:"result"`
 	}
 )
+
+type (
+	ChangePwdReq {
+		Mobile   string `json:"mobile"`
+		Msgcode  string `json:"msgcode"`	
+		NewPassword string `json:"newPassword"`
+	}
+)
