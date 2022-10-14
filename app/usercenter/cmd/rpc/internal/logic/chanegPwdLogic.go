@@ -47,13 +47,9 @@ func (l *ChanegPwdLogic) ChanegPwd(in *pb.ChangePwdReq) (*pb.ChangePwdResp, erro
 		return nil, errors.Wrapf(xerr.NewErrCode(xerr.DB_ERROR), "根据手机号查询用户信息失败，mobile:%s,err:%v", in.Mobile, err)
 	}
 	user.Password = tool.Md5ByString(in.NewPassword)
-	updateResult, err := l.svcCtx.UserModel.Update(l.ctx, nil, user)
+	err = l.svcCtx.UserModel.UpdateWithVersion(l.ctx, nil, user)
 	if err != nil {
-		return nil, errors.Wrapf(xerr.NewErrCode(xerr.DB_ERROR), "Register db user Update err:%v,user:%+v", err, user)
-	}
-	updateId, err := updateResult.RowsAffected()
-	if err != nil {
-		return nil, errors.Wrapf(xerr.NewErrCode(xerr.DB_ERROR), "Register db user updateResult.RowsAffected err:%v, id:%v, user:%+v", err, updateId, user)
+		return nil, errors.Wrapf(xerr.NewErrCode(xerr.DB_ERROR), "Change db user password err:%v,user:%+v", err, user)
 	}
 
 	return &pb.ChangePwdResp{}, nil

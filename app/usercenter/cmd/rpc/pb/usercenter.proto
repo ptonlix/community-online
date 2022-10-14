@@ -112,6 +112,25 @@ message ChangePwdReq {
 message ChangePwdResp {
 
 }
+
+message UpdateUserReq {
+  int64  id = 1;
+  string nickname = 2; 
+  int64  sex = 3;
+  string avatar = 4;
+  string info = 5; 
+}
+message UpdateUserResp {
+
+}
+
+message DeleteUserReq {
+  int64  id = 1;
+}
+message DeleteUserResp {
+
+}
+
 //service
 service usercenter {
   rpc login(LoginReq) returns(LoginResp);
@@ -124,4 +143,6 @@ service usercenter {
   rpc GetCaptcha(GetCaptchaReq) returns(GetCaptchaResp);
   rpc VerfyCaptcha(VerfyCaptchaReq) returns(VerfyCaptchaResp);
   rpc ChanegPwd(ChangePwdReq) returns(ChangePwdResp);
+  rpc UpdateUser(UpdateUserReq) returns(UpdateUserResp);
+  rpc DeleteUser(DeleteUserReq) returns(DeleteUserResp);
 }

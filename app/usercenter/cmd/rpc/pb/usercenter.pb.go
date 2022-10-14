@@ -1244,6 +1244,208 @@ func (*ChangePwdResp) Descriptor() ([]byte, []int) {
 	return file_usercenter_proto_rawDescGZIP(), []int{21}
 }
 
+type UpdateUserReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id       int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Nickname string `protobuf:"bytes,2,opt,name=nickname,proto3" json:"nickname,omitempty"`
+	Sex      int64  `protobuf:"varint,3,opt,name=sex,proto3" json:"sex,omitempty"`
+	Avatar   string `protobuf:"bytes,4,opt,name=avatar,proto3" json:"avatar,omitempty"`
+	Info     string `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+}
+
+func (x *UpdateUserReq) Reset() {
+	*x = UpdateUserReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_usercenter_proto_msgTypes[22]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdateUserReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateUserReq) ProtoMessage() {}
+
+func (x *UpdateUserReq) ProtoReflect() protoreflect.Message {
+	mi := &file_usercenter_proto_msgTypes[22]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateUserReq.ProtoReflect.Descriptor instead.
+func (*UpdateUserReq) Descriptor() ([]byte, []int) {
+	return file_usercenter_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *UpdateUserReq) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *UpdateUserReq) GetNickname() string {
+	if x != nil {
+		return x.Nickname
+	}
+	return ""
+}
+
+func (x *UpdateUserReq) GetSex() int64 {
+	if x != nil {
+		return x.Sex
+	}
+	return 0
+}
+
+func (x *UpdateUserReq) GetAvatar() string {
+	if x != nil {
+		return x.Avatar
+	}
+	return ""
+}
+
+func (x *UpdateUserReq) GetInfo() string {
+	if x != nil {
+		return x.Info
+	}
+	return ""
+}
+
+type UpdateUserResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *UpdateUserResp) Reset() {
+	*x = UpdateUserResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_usercenter_proto_msgTypes[23]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdateUserResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateUserResp) ProtoMessage() {}
+
+func (x *UpdateUserResp) ProtoReflect() protoreflect.Message {
+	mi := &file_usercenter_proto_msgTypes[23]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateUserResp.ProtoReflect.Descriptor instead.
+func (*UpdateUserResp) Descriptor() ([]byte, []int) {
+	return file_usercenter_proto_rawDescGZIP(), []int{23}
+}
+
+type DeleteUserReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (x *DeleteUserReq) Reset() {
+	*x = DeleteUserReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_usercenter_proto_msgTypes[24]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteUserReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteUserReq) ProtoMessage() {}
+
+func (x *DeleteUserReq) ProtoReflect() protoreflect.Message {
+	mi := &file_usercenter_proto_msgTypes[24]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteUserReq.ProtoReflect.Descriptor instead.
+func (*DeleteUserReq) Descriptor() ([]byte, []int) {
+	return file_usercenter_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *DeleteUserReq) GetId() int64 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+type DeleteUserResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *DeleteUserResp) Reset() {
+	*x = DeleteUserResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_usercenter_proto_msgTypes[25]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteUserResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteUserResp) ProtoMessage() {}
+
+func (x *DeleteUserResp) ProtoReflect() protoreflect.Message {
+	mi := &file_usercenter_proto_msgTypes[25]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteUserResp.ProtoReflect.Descriptor instead.
+func (*DeleteUserResp) Descriptor() ([]byte, []int) {
+	return file_usercenter_proto_rawDescGZIP(), []int{25}
+}
+
 var File_usercenter_proto protoreflect.FileDescriptor
 
 var file_usercenter_proto_rawDesc = []byte{
@@ -1354,7 +1556,19 @@ var file_usercenter_proto_rawDesc = []byte{
 	0x07, 0x6d, 0x73, 0x67, 0x63, 0x6f, 0x64, 0x65, 0x12, 0x20, 0x0a, 0x0b, 0x6e, 0x65, 0x77, 0x50,
 	0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x6e,
 	0x65, 0x77, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x22, 0x0f, 0x0a, 0x0d, 0x43, 0x68,
-	0x61, 0x6e, 0x67, 0x65, 0x50, 0x77, 0x64, 0x52, 0x65, 0x73, 0x70, 0x32, 0xc4, 0x04, 0x0a, 0x0a,
+	0x61, 0x6e, 0x67, 0x65, 0x50, 0x77, 0x64, 0x52, 0x65, 0x73, 0x70, 0x22, 0x79, 0x0a, 0x0d, 0x55,
+	0x70, 0x64, 0x61, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x71, 0x12, 0x0e, 0x0a, 0x02,
+	0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69, 0x64, 0x12, 0x1a, 0x0a, 0x08,
+	0x6e, 0x69, 0x63, 0x6b, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08,
+	0x6e, 0x69, 0x63, 0x6b, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x10, 0x0a, 0x03, 0x73, 0x65, 0x78, 0x18,
+	0x03, 0x20, 0x01, 0x28, 0x03, 0x52, 0x03, 0x73, 0x65, 0x78, 0x12, 0x16, 0x0a, 0x06, 0x61, 0x76,
+	0x61, 0x74, 0x61, 0x72, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x61, 0x76, 0x61, 0x74,
+	0x61, 0x72, 0x12, 0x12, 0x0a, 0x04, 0x69, 0x6e, 0x66, 0x6f, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x04, 0x69, 0x6e, 0x66, 0x6f, 0x22, 0x10, 0x0a, 0x0e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65,
+	0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x22, 0x1f, 0x0a, 0x0d, 0x44, 0x65, 0x6c, 0x65,
+	0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x71, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x02, 0x69, 0x64, 0x22, 0x10, 0x0a, 0x0e, 0x44, 0x65, 0x6c,
+	0x65, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x32, 0xae, 0x05, 0x0a, 0x0a,
 	0x75, 0x73, 0x65, 0x72, 0x63, 0x65, 0x6e, 0x74, 0x65, 0x72, 0x12, 0x24, 0x0a, 0x05, 0x6c, 0x6f,
 	0x67, 0x69, 0x6e, 0x12, 0x0c, 0x2e, 0x70, 0x62, 0x2e, 0x4c, 0x6f, 0x67, 0x69, 0x6e, 0x52, 0x65,
 	0x71, 0x1a, 0x0d, 0x2e, 0x70, 0x62, 0x2e, 0x4c, 0x6f, 0x67, 0x69, 0x6e, 0x52, 0x65, 0x73, 0x70,
@@ -1391,8 +1605,14 @@ var file_usercenter_proto_rawDesc = []byte{
 	0x12, 0x30, 0x0a, 0x09, 0x43, 0x68, 0x61, 0x6e, 0x65, 0x67, 0x50, 0x77, 0x64, 0x12, 0x10, 0x2e,
 	0x70, 0x62, 0x2e, 0x43, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x50, 0x77, 0x64, 0x52, 0x65, 0x71, 0x1a,
 	0x11, 0x2e, 0x70, 0x62, 0x2e, 0x43, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x50, 0x77, 0x64, 0x52, 0x65,
-	0x73, 0x70, 0x42, 0x06, 0x5a, 0x04, 0x2e, 0x2f, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x33,
+	0x73, 0x70, 0x12, 0x33, 0x0a, 0x0a, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72,
+	0x12, 0x11, 0x2e, 0x70, 0x62, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72,
+	0x52, 0x65, 0x71, 0x1a, 0x12, 0x2e, 0x70, 0x62, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x55,
+	0x73, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x12, 0x33, 0x0a, 0x0a, 0x44, 0x65, 0x6c, 0x65, 0x74,
+	0x65, 0x55, 0x73, 0x65, 0x72, 0x12, 0x11, 0x2e, 0x70, 0x62, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74,
+	0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x71, 0x1a, 0x12, 0x2e, 0x70, 0x62, 0x2e, 0x44, 0x65,
+	0x6c, 0x65, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x42, 0x06, 0x5a, 0x04,
+	0x2e, 0x2f, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1407,7 +1627,7 @@ func file_usercenter_proto_rawDescGZIP() []byte {
 	return file_usercenter_proto_rawDescData
 }
 
-var file_usercenter_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
+var file_usercenter_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
 var file_usercenter_proto_goTypes = []interface{}{
 	(*User)(nil),                     // 0: pb.User
 	(*UserAuth)(nil),                 // 1: pb.UserAuth
@@ -1431,6 +1651,10 @@ var file_usercenter_proto_goTypes = []interface{}{
 	(*VerfyCaptchaResp)(nil),         // 19: pb.VerfyCaptchaResp
 	(*ChangePwdReq)(nil),             // 20: pb.ChangePwdReq
 	(*ChangePwdResp)(nil),            // 21: pb.ChangePwdResp
+	(*UpdateUserReq)(nil),            // 22: pb.UpdateUserReq
+	(*UpdateUserResp)(nil),           // 23: pb.UpdateUserResp
+	(*DeleteUserReq)(nil),            // 24: pb.DeleteUserReq
+	(*DeleteUserResp)(nil),           // 25: pb.DeleteUserResp
 }
 var file_usercenter_proto_depIdxs = []int32{
 	0,  // 0: pb.GetUserInfoResp.user:type_name -> pb.User
@@ -1446,18 +1670,22 @@ var file_usercenter_proto_depIdxs = []int32{
 	16, // 10: pb.usercenter.GetCaptcha:input_type -> pb.GetCaptchaReq
 	18, // 11: pb.usercenter.VerfyCaptcha:input_type -> pb.VerfyCaptchaReq
 	20, // 12: pb.usercenter.ChanegPwd:input_type -> pb.ChangePwdReq
-	5,  // 13: pb.usercenter.login:output_type -> pb.LoginResp
-	7,  // 14: pb.usercenter.logout:output_type -> pb.LogoutResp
-	3,  // 15: pb.usercenter.register:output_type -> pb.RegisterResp
-	9,  // 16: pb.usercenter.getUserInfo:output_type -> pb.GetUserInfoResp
-	11, // 17: pb.usercenter.getUserAuthByAuthKey:output_type -> pb.GetUserAuthByAuthKeyResp
-	13, // 18: pb.usercenter.getUserAuthByUserId:output_type -> pb.GetUserAuthyUserIdResp
-	15, // 19: pb.usercenter.generateToken:output_type -> pb.GenerateTokenResp
-	17, // 20: pb.usercenter.GetCaptcha:output_type -> pb.GetCaptchaResp
-	19, // 21: pb.usercenter.VerfyCaptcha:output_type -> pb.VerfyCaptchaResp
-	21, // 22: pb.usercenter.ChanegPwd:output_type -> pb.ChangePwdResp
-	13, // [13:23] is the sub-list for method output_type
-	3,  // [3:13] is the sub-list for method input_type
+	22, // 13: pb.usercenter.UpdateUser:input_type -> pb.UpdateUserReq
+	24, // 14: pb.usercenter.DeleteUser:input_type -> pb.DeleteUserReq
+	5,  // 15: pb.usercenter.login:output_type -> pb.LoginResp
+	7,  // 16: pb.usercenter.logout:output_type -> pb.LogoutResp
+	3,  // 17: pb.usercenter.register:output_type -> pb.RegisterResp
+	9,  // 18: pb.usercenter.getUserInfo:output_type -> pb.GetUserInfoResp
+	11, // 19: pb.usercenter.getUserAuthByAuthKey:output_type -> pb.GetUserAuthByAuthKeyResp
+	13, // 20: pb.usercenter.getUserAuthByUserId:output_type -> pb.GetUserAuthyUserIdResp
+	15, // 21: pb.usercenter.generateToken:output_type -> pb.GenerateTokenResp
+	17, // 22: pb.usercenter.GetCaptcha:output_type -> pb.GetCaptchaResp
+	19, // 23: pb.usercenter.VerfyCaptcha:output_type -> pb.VerfyCaptchaResp
+	21, // 24: pb.usercenter.ChanegPwd:output_type -> pb.ChangePwdResp
+	23, // 25: pb.usercenter.UpdateUser:output_type -> pb.UpdateUserResp
+	25, // 26: pb.usercenter.DeleteUser:output_type -> pb.DeleteUserResp
+	15, // [15:27] is the sub-list for method output_type
+	3,  // [3:15] is the sub-list for method input_type
 	3,  // [3:3] is the sub-list for extension type_name
 	3,  // [3:3] is the sub-list for extension extendee
 	0,  // [0:3] is the sub-list for field type_name
@@ -1733,6 +1961,54 @@ func file_usercenter_proto_init() {
 				return nil
 			}
 		}
+		file_usercenter_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdateUserReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_usercenter_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdateUserResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_usercenter_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeleteUserReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_usercenter_proto_msgTypes[25].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeleteUserResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -1740,7 +2016,7 @@ func file_usercenter_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_usercenter_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   22,
+			NumMessages:   26,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

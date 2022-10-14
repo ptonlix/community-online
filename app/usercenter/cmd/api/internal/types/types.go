@@ -93,3 +93,15 @@ type ChangePwdReq struct {
 	Msgcode     string `json:"msgcode"`
 	NewPassword string `json:"newPassword"`
 }
+
+type UpdateUserReq struct {
+	Id       int64  `json:"id"`
+	Nickname string `json:"nickname"`
+	Sex      int64  `json:"sex"`
+	Avatar   string `json:"avatar"`
+	Info     string `json:"info"`
+}
+
+type DeleteUserReq struct {
+	Id int64 `json:"id"`
+}

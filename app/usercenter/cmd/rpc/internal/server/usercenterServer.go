@@ -71,3 +71,13 @@ func (s *UsercenterServer) ChanegPwd(ctx context.Context, in *pb.ChangePwdReq) (
 	l := logic.NewChanegPwdLogic(ctx, s.svcCtx)
 	return l.ChanegPwd(in)
 }
+
+func (s *UsercenterServer) UpdateUser(ctx context.Context, in *pb.UpdateUserReq) (*pb.UpdateUserResp, error) {
+	l := logic.NewUpdateUserLogic(ctx, s.svcCtx)
+	return l.UpdateUser(in)
+}
+
+func (s *UsercenterServer) DeleteUser(ctx context.Context, in *pb.DeleteUserReq) (*pb.DeleteUserResp, error) {
+	l := logic.NewDeleteUserLogic(ctx, s.svcCtx)
+	return l.DeleteUser(in)
+}

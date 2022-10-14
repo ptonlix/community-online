@@ -59,6 +59,16 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Path:    "/user/detail",
 				Handler: usercenter.DetailHandler(serverCtx),
 			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/user/update-user",
+				Handler: usercenter.UpdateUserHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/user/delete-user",
+				Handler: usercenter.DeleteUserHandler(serverCtx),
+			},
 		},
 		rest.WithJwt(serverCtx.Config.JwtAuth.AccessSecret),
 		rest.WithPrefix("/usercenter/v1"),

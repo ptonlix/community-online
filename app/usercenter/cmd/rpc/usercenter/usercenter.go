@@ -15,6 +15,8 @@ import (
 type (
 	ChangePwdReq             = pb.ChangePwdReq
 	ChangePwdResp            = pb.ChangePwdResp
+	DeleteUserReq            = pb.DeleteUserReq
+	DeleteUserResp           = pb.DeleteUserResp
 	GenerateTokenReq         = pb.GenerateTokenReq
 	GenerateTokenResp        = pb.GenerateTokenResp
 	GetCaptchaReq            = pb.GetCaptchaReq
@@ -31,6 +33,8 @@ type (
 	LogoutResp               = pb.LogoutResp
 	RegisterReq              = pb.RegisterReq
 	RegisterResp             = pb.RegisterResp
+	UpdateUserReq            = pb.UpdateUserReq
+	UpdateUserResp           = pb.UpdateUserResp
 	User                     = pb.User
 	UserAuth                 = pb.UserAuth
 	VerfyCaptchaReq          = pb.VerfyCaptchaReq
@@ -47,6 +51,8 @@ type (
 		GetCaptcha(ctx context.Context, in *GetCaptchaReq, opts ...grpc.CallOption) (*GetCaptchaResp, error)
 		VerfyCaptcha(ctx context.Context, in *VerfyCaptchaReq, opts ...grpc.CallOption) (*VerfyCaptchaResp, error)
 		ChanegPwd(ctx context.Context, in *ChangePwdReq, opts ...grpc.CallOption) (*ChangePwdResp, error)
+		UpdateUser(ctx context.Context, in *UpdateUserReq, opts ...grpc.CallOption) (*UpdateUserResp, error)
+		DeleteUser(ctx context.Context, in *DeleteUserReq, opts ...grpc.CallOption) (*DeleteUserResp, error)
 	}
 
 	defaultUsercenter struct {
@@ -108,4 +114,14 @@ func (m *defaultUsercenter) VerfyCaptcha(ctx context.Context, in *VerfyCaptchaRe
 func (m *defaultUsercenter) ChanegPwd(ctx context.Context, in *ChangePwdReq, opts ...grpc.CallOption) (*ChangePwdResp, error) {
 	client := pb.NewUsercenterClient(m.cli.Conn())
 	return client.ChanegPwd(ctx, in, opts...)
+}
+
+func (m *defaultUsercenter) UpdateUser(ctx context.Context, in *UpdateUserReq, opts ...grpc.CallOption) (*UpdateUserResp, error) {
+	client := pb.NewUsercenterClient(m.cli.Conn())
+	return client.UpdateUser(ctx, in, opts...)
+}
+
+func (m *defaultUsercenter) DeleteUser(ctx context.Context, in *DeleteUserReq, opts ...grpc.CallOption) (*DeleteUserResp, error) {
+	client := pb.NewUsercenterClient(m.cli.Conn())
+	return client.DeleteUser(ctx, in, opts...)
 }

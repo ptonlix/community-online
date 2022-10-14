@@ -78,4 +78,15 @@ service usercenter {
 	@handler detail
 	get /user/detail returns (UserInfoResp)
 	
+	@doc(
+		summary: "update user"
+	)
+	@handler updateUser
+	post /user/update-user(UpdateUserReq)
+	
+	@doc(
+		summary: "update user"
+	)
+	@handler deleteUser
+	post /user/delete-user(DeleteUserReq)
 }
