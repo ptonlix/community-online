@@ -34,9 +34,14 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Handler: usercenter.MessagecodeHandler(serverCtx),
 			},
 			{
+				Method:  http.MethodGet,
+				Path:    "/user/get-captcha",
+				Handler: usercenter.GetCaptchaHandler(serverCtx),
+			},
+			{
 				Method:  http.MethodPost,
-				Path:    "/user/msg-login",
-				Handler: usercenter.MsgLoginHandler(serverCtx),
+				Path:    "/user/verfy-captcha",
+				Handler: usercenter.VerfyCaptchaHandler(serverCtx),
 			},
 		},
 		rest.WithPrefix("/usercenter/v1"),

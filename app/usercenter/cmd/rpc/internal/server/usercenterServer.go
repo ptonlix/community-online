@@ -56,3 +56,13 @@ func (s *UsercenterServer) GenerateToken(ctx context.Context, in *pb.GenerateTok
 	l := logic.NewGenerateTokenLogic(ctx, s.svcCtx)
 	return l.GenerateToken(in)
 }
+
+func (s *UsercenterServer) GetCaptcha(ctx context.Context, in *pb.GetCaptchaReq) (*pb.GetCaptchaResp, error) {
+	l := logic.NewGetCaptchaLogic(ctx, s.svcCtx)
+	return l.GetCaptcha(in)
+}
+
+func (s *UsercenterServer) VerfyCaptcha(ctx context.Context, in *pb.VerfyCaptchaReq) (*pb.VerfyCaptchaResp, error) {
+	l := logic.NewVerfyCaptchaLogic(ctx, s.svcCtx)
+	return l.VerfyCaptcha(in)
+}

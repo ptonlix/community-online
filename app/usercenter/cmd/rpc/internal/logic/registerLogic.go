@@ -2,11 +2,13 @@ package logic
 
 import (
 	"context"
+	"fmt"
 
 	"github/community-online/app/usercenter/cmd/rpc/internal/svc"
 	"github/community-online/app/usercenter/cmd/rpc/pb"
 	"github/community-online/app/usercenter/cmd/rpc/usercenter"
 	"github/community-online/app/usercenter/model"
+	"github/community-online/common/globalkey"
 	"github/community-online/common/tool"
 	"github/community-online/common/xerr"
 
@@ -32,6 +34,16 @@ func NewRegisterLogic(ctx context.Context, svcCtx *svc.ServiceContext) *Register
 }
 
 func (l *RegisterLogic) Register(in *pb.RegisterReq) (*pb.RegisterResp, error) {
+	// 判断验证码是否正确
+	redisCode, err := l.svcCtx.RedisClient.GetCtx(l.ctx, fmt.Sprintf(globalkey.CacheSmsPhoneKey, globalkey.SmsRegister, in.Mobile))
+	if err != nil {
+		return nil, errors.Wrapf(xerr.NewErrCode(xerr.DB_ERROR), "根据手机号查询短信验证码失败，mobile:%s,err:%v", in.Mobile, err)
+	}
+	if redisCode != in.MsgCode {
+		return nil, errors.Wrapf(xerr.NewErrCode(xerr.DB_ERROR), "短信验证码失败，mobile:%s,redisCode:%v, inputCode:%v", in.Mobile, redisCode, in.MsgCode)
+	}
+	// 删除验证码
+	l.svcCtx.RedisClient.DelCtx(l.ctx, fmt.Sprintf(globalkey.CacheSmsPhoneKey, globalkey.SmsLogin, in.Mobile))
 
 	user, err := l.svcCtx.UserModel.FindOneByMobile(l.ctx, in.Mobile)
 	if err != nil && err != model.ErrNotFound {
@@ -45,8 +57,10 @@ func (l *RegisterLogic) Register(in *pb.RegisterReq) (*pb.RegisterResp, error) {
 	if err := l.svcCtx.UserModel.Trans(l.ctx, func(ctx context.Context, session sqlx.Session) error {
 		user := new(model.User)
 		user.Mobile = in.Mobile
-		if len(user.Nickname) == 0 {
+		if len(in.Nickname) == 0 {
 			user.Nickname = tool.Krand(8, tool.KC_RAND_KIND_ALL)
+		} else {
+			user.Nickname = in.Nickname
 		}
 		if len(in.Password) > 0 {
 			user.Password = tool.Md5ByString(in.Password)

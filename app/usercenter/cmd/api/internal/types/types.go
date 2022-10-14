@@ -12,7 +12,9 @@ type User struct {
 
 type RegisterReq struct {
 	Mobile   string `json:"mobile"`
+	Msgcode  string `json:"msgcode"`
 	Password string `json:"password"`
+	Nickname string `json:"nickname,optional"`
 }
 
 type RegisterResp struct {
@@ -66,4 +68,22 @@ type UserInfoReq struct {
 
 type UserInfoResp struct {
 	UserInfo User `json:"userInfo"`
+}
+
+type GetCaptchaReq struct {
+}
+
+type GetCaptchaResp struct {
+	ImageBase64 string `json:"imageBase64"`
+	ThumbBase64 string `json:"thumbBase64"`
+	CaptchaKey  string `json:"captchaKey"`
+}
+
+type VerfyCaptchaReq struct {
+	Dots       []int64 `json:"dots"`
+	CaptchaKey string  `json:"captchaKey"`
+}
+
+type VerfyCaptchaResp struct {
+	Result bool `json:"result"`
 }

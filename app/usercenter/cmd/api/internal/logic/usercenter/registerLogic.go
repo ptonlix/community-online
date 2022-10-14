@@ -33,6 +33,8 @@ func (l *RegisterLogic) Register(req *types.RegisterReq) (*types.RegisterResp, e
 		Password: req.Password,
 		AuthKey:  req.Mobile,
 		AuthType: model.UserAuthTypeSystem,
+		Nickname: req.Nickname,
+		MsgCode:  req.Msgcode,
 	})
 	if err != nil {
 		return nil, errors.Wrapf(err, "req: %+v", req)

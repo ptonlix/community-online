@@ -45,10 +45,16 @@ service usercenter {
 	post /user/messagecode (MsgCodeReq)
 	
 	@doc(
-		summary: "mobile code login"
+		summary: "get captcha code"
 	)
-	@handler msgLogin
-	post /user/msg-login(MsgLoginReq) returns(MsgLoginResp)
+	@handler getCaptcha
+	get /user/get-captcha returns(GetCaptchaResp)
+	
+	@doc(
+		summary: "verfy captcha code"
+	)
+	@handler verfyCaptcha
+	post /user/verfy-captcha(VerfyCaptchaReq) returns(VerfyCaptchaResp)
 	
 }
 

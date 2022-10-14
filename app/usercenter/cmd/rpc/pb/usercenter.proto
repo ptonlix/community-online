@@ -30,6 +30,7 @@ message RegisterReq {
   string password = 3;
   string authKey = 4;
   string authType = 5;
+  string msgCode = 6;
 }
 message RegisterResp {
   string accessToken = 1;
@@ -87,6 +88,22 @@ message GenerateTokenResp {
   int64  refreshAfter = 3;
 }
 
+message GetCaptchaReq {
+}
+message GetCaptchaResp {
+  string imageBase64 = 1;
+  string thumbBase64 = 2;
+  string captchaKey = 3;
+}
+
+message VerfyCaptchaReq {
+  repeated int64 dots = 1;
+  string captchaKey = 2;
+}
+message VerfyCaptchaResp {
+  bool result = 1;
+}
+
 //service
 service usercenter {
   rpc login(LoginReq) returns(LoginResp);
@@ -96,4 +113,6 @@ service usercenter {
   rpc getUserAuthByAuthKey(GetUserAuthByAuthKeyReq) returns(GetUserAuthByAuthKeyResp);
   rpc getUserAuthByUserId(GetUserAuthByUserIdReq) returns(GetUserAuthyUserIdResp);
   rpc generateToken(GenerateTokenReq) returns(GenerateTokenResp);
+  rpc GetCaptcha(GetCaptchaReq) returns(GetCaptchaResp);
+  rpc VerfyCaptcha(VerfyCaptchaReq) returns(VerfyCaptchaResp);
 }

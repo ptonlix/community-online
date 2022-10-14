@@ -77,7 +77,7 @@ func (l *LoginLogic) loginByMobile(mobile, password string) (*pb.LoginResp, erro
 // 手机验证码登录
 func (l *LoginLogic) loginByMessage(mobile, code string) (*pb.LoginResp, error) {
 	// 验证手机验证码是否正确
-	redisCode, err := l.svcCtx.RedisClient.Get(fmt.Sprintf(globalkey.CacheSmsPhoneKey, mobile))
+	redisCode, err := l.svcCtx.RedisClient.GetCtx(l.ctx, fmt.Sprintf(globalkey.CacheSmsPhoneKey, globalkey.SmsLogin, mobile))
 	if err != nil {
 		return nil, errors.Wrapf(xerr.NewErrCode(xerr.DB_ERROR), "根据手机号查询短信验证码失败，mobile:%s,err:%v", mobile, err)
 	}
@@ -116,6 +116,8 @@ func (l *LoginLogic) loginByMessage(mobile, code string) (*pb.LoginResp, error) 
 	if err != nil {
 		return nil, errors.Wrapf(ErrGenerateTokenError, "GenerateToken userId : %d", user.Id)
 	}
+	// 删除验证码
+	l.svcCtx.RedisClient.DelCtx(l.ctx, fmt.Sprintf(globalkey.CacheSmsPhoneKey, globalkey.SmsLogin, mobile))
 
 	return &usercenter.LoginResp{
 		AccessToken:  tokenResp.AccessToken,

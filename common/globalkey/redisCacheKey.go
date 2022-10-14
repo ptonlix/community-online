@@ -9,5 +9,6 @@ but "model cache key" in model
 const CacheUserTokenKey = "user_token:%d"
 
 // 手机短信验证码缓存
-const CacheSmsPhoneKey = "sms_phone:%s"
+const CacheSmsPhoneKey = "sms_phone:%s:%s"
 const CacheSmsPhoneKeyExp = 5 * 60 //5分钟超时
+const CacheCaptchaKeyExp = 5 * 60  //5分钟超时
