@@ -53,23 +53,31 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	)
 
 	server.AddRoutes(
-		[]rest.Route{
-			{
-				Method:  http.MethodGet,
-				Path:    "/user/detail",
-				Handler: usercenter.DetailHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/user/update-user",
-				Handler: usercenter.UpdateUserHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/user/delete-user",
-				Handler: usercenter.DeleteUserHandler(serverCtx),
-			},
-		},
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.OnlineStatus},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
+					Path:    "/user/detail",
+					Handler: usercenter.DetailHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/user/update-user",
+					Handler: usercenter.UpdateUserHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodPost,
+					Path:    "/user/delete-user",
+					Handler: usercenter.DeleteUserHandler(serverCtx),
+				},
+				{
+					Method:  http.MethodGet,
+					Path:    "/user/online-user",
+					Handler: usercenter.GetOnlineUserHandler(serverCtx),
+				},
+			}...,
+		),
 		rest.WithJwt(serverCtx.Config.JwtAuth.AccessSecret),
 		rest.WithPrefix("/usercenter/v1"),
 	)

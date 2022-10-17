@@ -34,6 +34,8 @@ type UsercenterClient interface {
 	ChanegPwd(ctx context.Context, in *ChangePwdReq, opts ...grpc.CallOption) (*ChangePwdResp, error)
 	UpdateUser(ctx context.Context, in *UpdateUserReq, opts ...grpc.CallOption) (*UpdateUserResp, error)
 	DeleteUser(ctx context.Context, in *DeleteUserReq, opts ...grpc.CallOption) (*DeleteUserResp, error)
+	FreshUserOnlineStatus(ctx context.Context, in *FreshUserOnlineStatusReq, opts ...grpc.CallOption) (*FreshUserOnlineStatusResp, error)
+	GetOnlineUser(ctx context.Context, in *GetOnlineUserReq, opts ...grpc.CallOption) (*GetOnlineUserResp, error)
 }
 
 type usercenterClient struct {
@@ -152,6 +154,24 @@ func (c *usercenterClient) DeleteUser(ctx context.Context, in *DeleteUserReq, op
 	return out, nil
 }
 
+func (c *usercenterClient) FreshUserOnlineStatus(ctx context.Context, in *FreshUserOnlineStatusReq, opts ...grpc.CallOption) (*FreshUserOnlineStatusResp, error) {
+	out := new(FreshUserOnlineStatusResp)
+	err := c.cc.Invoke(ctx, "/pb.usercenter/FreshUserOnlineStatus", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *usercenterClient) GetOnlineUser(ctx context.Context, in *GetOnlineUserReq, opts ...grpc.CallOption) (*GetOnlineUserResp, error) {
+	out := new(GetOnlineUserResp)
+	err := c.cc.Invoke(ctx, "/pb.usercenter/GetOnlineUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // UsercenterServer is the server API for Usercenter service.
 // All implementations must embed UnimplementedUsercenterServer
 // for forward compatibility
@@ -168,6 +188,8 @@ type UsercenterServer interface {
 	ChanegPwd(context.Context, *ChangePwdReq) (*ChangePwdResp, error)
 	UpdateUser(context.Context, *UpdateUserReq) (*UpdateUserResp, error)
 	DeleteUser(context.Context, *DeleteUserReq) (*DeleteUserResp, error)
+	FreshUserOnlineStatus(context.Context, *FreshUserOnlineStatusReq) (*FreshUserOnlineStatusResp, error)
+	GetOnlineUser(context.Context, *GetOnlineUserReq) (*GetOnlineUserResp, error)
 	mustEmbedUnimplementedUsercenterServer()
 }
 
@@ -210,6 +232,12 @@ func (UnimplementedUsercenterServer) UpdateUser(context.Context, *UpdateUserReq)
 }
 func (UnimplementedUsercenterServer) DeleteUser(context.Context, *DeleteUserReq) (*DeleteUserResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteUser not implemented")
+}
+func (UnimplementedUsercenterServer) FreshUserOnlineStatus(context.Context, *FreshUserOnlineStatusReq) (*FreshUserOnlineStatusResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FreshUserOnlineStatus not implemented")
+}
+func (UnimplementedUsercenterServer) GetOnlineUser(context.Context, *GetOnlineUserReq) (*GetOnlineUserResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOnlineUser not implemented")
 }
 func (UnimplementedUsercenterServer) mustEmbedUnimplementedUsercenterServer() {}
 
@@ -440,6 +468,42 @@ func _Usercenter_DeleteUser_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Usercenter_FreshUserOnlineStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FreshUserOnlineStatusReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UsercenterServer).FreshUserOnlineStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.usercenter/FreshUserOnlineStatus",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UsercenterServer).FreshUserOnlineStatus(ctx, req.(*FreshUserOnlineStatusReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Usercenter_GetOnlineUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOnlineUserReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(UsercenterServer).GetOnlineUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/pb.usercenter/GetOnlineUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(UsercenterServer).GetOnlineUser(ctx, req.(*GetOnlineUserReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Usercenter_ServiceDesc is the grpc.ServiceDesc for Usercenter service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -494,6 +558,14 @@ var Usercenter_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteUser",
 			Handler:    _Usercenter_DeleteUser_Handler,
+		},
+		{
+			MethodName: "FreshUserOnlineStatus",
+			Handler:    _Usercenter_FreshUserOnlineStatus_Handler,
+		},
+		{
+			MethodName: "GetOnlineUser",
+			Handler:    _Usercenter_GetOnlineUser_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

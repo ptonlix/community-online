@@ -69,6 +69,7 @@ service usercenter {
 	prefix: usercenter/v1
 	group: usercenter
 	jwt: JwtAuth
+	middleware: OnlineStatus // 路由中间件声明
 )
 service usercenter {
 	
@@ -89,4 +90,10 @@ service usercenter {
 	)
 	@handler deleteUser
 	post /user/delete-user(DeleteUserReq)
+	
+	@doc(
+		summary: "get online user list"
+	)
+	@handler getOnlineUser
+	get /user/online-user returns(GetOnlineUserResp)
 }

@@ -13,7 +13,7 @@ SmsConfig:
   TemplateIds:  #模板iI
     Login: "1570629" #登陆
     Register: "1570632" #注册
-    ChangePwd: "1570634" #修改密码
+    ChangePwd: "1574732" #修改密码
 Redis:
   Host: 127.0.0.1:6379
   Type: node

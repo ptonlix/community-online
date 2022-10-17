@@ -105,3 +105,7 @@ type UpdateUserReq struct {
 type DeleteUserReq struct {
 	Id int64 `json:"id"`
 }
+
+type GetOnlineUserResp struct {
+	OnlineUser []int64 `json:"onlineUser"`
+}

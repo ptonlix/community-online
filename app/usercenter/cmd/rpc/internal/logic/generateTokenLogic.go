@@ -7,6 +7,7 @@ import (
 	"github/community-online/app/usercenter/cmd/rpc/internal/svc"
 	"github/community-online/app/usercenter/cmd/rpc/pb"
 	"github/community-online/common/ctxdata"
+	"github/community-online/common/xerr"
 
 	"github.com/golang-jwt/jwt/v4"
 	"github.com/pkg/errors"
@@ -33,6 +34,12 @@ func (l *GenerateTokenLogic) GenerateToken(in *pb.GenerateTokenReq) (*pb.Generat
 	accessToken, err := l.getJwtToken(l.svcCtx.Config.JwtAuth.AccessSecret, now, accessExpire, in.UserId)
 	if err != nil {
 		return nil, errors.Wrapf(ErrGenerateTokenError, "getJwtToken err userId:%d , err:%v", in.UserId, err)
+	}
+	refreshOpt := NewFreshUserOnlineStatusLogic(l.ctx, l.svcCtx)
+	// 统计在线用户数
+	_, err = refreshOpt.FreshUserOnlineStatus(&pb.FreshUserOnlineStatusReq{UserId: in.UserId})
+	if err != nil {
+		return nil, errors.Wrapf(xerr.NewErrCode(xerr.DB_ERROR), "Set Online user failed, err:%v", err)
 	}
 
 	return &pb.GenerateTokenResp{

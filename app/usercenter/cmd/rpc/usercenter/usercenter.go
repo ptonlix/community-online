@@ -13,32 +13,36 @@ import (
 )
 
 type (
-	ChangePwdReq             = pb.ChangePwdReq
-	ChangePwdResp            = pb.ChangePwdResp
-	DeleteUserReq            = pb.DeleteUserReq
-	DeleteUserResp           = pb.DeleteUserResp
-	GenerateTokenReq         = pb.GenerateTokenReq
-	GenerateTokenResp        = pb.GenerateTokenResp
-	GetCaptchaReq            = pb.GetCaptchaReq
-	GetCaptchaResp           = pb.GetCaptchaResp
-	GetUserAuthByAuthKeyReq  = pb.GetUserAuthByAuthKeyReq
-	GetUserAuthByAuthKeyResp = pb.GetUserAuthByAuthKeyResp
-	GetUserAuthByUserIdReq   = pb.GetUserAuthByUserIdReq
-	GetUserAuthyUserIdResp   = pb.GetUserAuthyUserIdResp
-	GetUserInfoReq           = pb.GetUserInfoReq
-	GetUserInfoResp          = pb.GetUserInfoResp
-	LoginReq                 = pb.LoginReq
-	LoginResp                = pb.LoginResp
-	LogoutReq                = pb.LogoutReq
-	LogoutResp               = pb.LogoutResp
-	RegisterReq              = pb.RegisterReq
-	RegisterResp             = pb.RegisterResp
-	UpdateUserReq            = pb.UpdateUserReq
-	UpdateUserResp           = pb.UpdateUserResp
-	User                     = pb.User
-	UserAuth                 = pb.UserAuth
-	VerfyCaptchaReq          = pb.VerfyCaptchaReq
-	VerfyCaptchaResp         = pb.VerfyCaptchaResp
+	ChangePwdReq              = pb.ChangePwdReq
+	ChangePwdResp             = pb.ChangePwdResp
+	DeleteUserReq             = pb.DeleteUserReq
+	DeleteUserResp            = pb.DeleteUserResp
+	FreshUserOnlineStatusReq  = pb.FreshUserOnlineStatusReq
+	FreshUserOnlineStatusResp = pb.FreshUserOnlineStatusResp
+	GenerateTokenReq          = pb.GenerateTokenReq
+	GenerateTokenResp         = pb.GenerateTokenResp
+	GetCaptchaReq             = pb.GetCaptchaReq
+	GetCaptchaResp            = pb.GetCaptchaResp
+	GetOnlineUserReq          = pb.GetOnlineUserReq
+	GetOnlineUserResp         = pb.GetOnlineUserResp
+	GetUserAuthByAuthKeyReq   = pb.GetUserAuthByAuthKeyReq
+	GetUserAuthByAuthKeyResp  = pb.GetUserAuthByAuthKeyResp
+	GetUserAuthByUserIdReq    = pb.GetUserAuthByUserIdReq
+	GetUserAuthyUserIdResp    = pb.GetUserAuthyUserIdResp
+	GetUserInfoReq            = pb.GetUserInfoReq
+	GetUserInfoResp           = pb.GetUserInfoResp
+	LoginReq                  = pb.LoginReq
+	LoginResp                 = pb.LoginResp
+	LogoutReq                 = pb.LogoutReq
+	LogoutResp                = pb.LogoutResp
+	RegisterReq               = pb.RegisterReq
+	RegisterResp              = pb.RegisterResp
+	UpdateUserReq             = pb.UpdateUserReq
+	UpdateUserResp            = pb.UpdateUserResp
+	User                      = pb.User
+	UserAuth                  = pb.UserAuth
+	VerfyCaptchaReq           = pb.VerfyCaptchaReq
+	VerfyCaptchaResp          = pb.VerfyCaptchaResp
 
 	Usercenter interface {
 		Login(ctx context.Context, in *LoginReq, opts ...grpc.CallOption) (*LoginResp, error)
@@ -53,6 +57,8 @@ type (
 		ChanegPwd(ctx context.Context, in *ChangePwdReq, opts ...grpc.CallOption) (*ChangePwdResp, error)
 		UpdateUser(ctx context.Context, in *UpdateUserReq, opts ...grpc.CallOption) (*UpdateUserResp, error)
 		DeleteUser(ctx context.Context, in *DeleteUserReq, opts ...grpc.CallOption) (*DeleteUserResp, error)
+		FreshUserOnlineStatus(ctx context.Context, in *FreshUserOnlineStatusReq, opts ...grpc.CallOption) (*FreshUserOnlineStatusResp, error)
+		GetOnlineUser(ctx context.Context, in *GetOnlineUserReq, opts ...grpc.CallOption) (*GetOnlineUserResp, error)
 	}
 
 	defaultUsercenter struct {
@@ -124,4 +130,14 @@ func (m *defaultUsercenter) UpdateUser(ctx context.Context, in *UpdateUserReq, o
 func (m *defaultUsercenter) DeleteUser(ctx context.Context, in *DeleteUserReq, opts ...grpc.CallOption) (*DeleteUserResp, error) {
 	client := pb.NewUsercenterClient(m.cli.Conn())
 	return client.DeleteUser(ctx, in, opts...)
+}
+
+func (m *defaultUsercenter) FreshUserOnlineStatus(ctx context.Context, in *FreshUserOnlineStatusReq, opts ...grpc.CallOption) (*FreshUserOnlineStatusResp, error) {
+	client := pb.NewUsercenterClient(m.cli.Conn())
+	return client.FreshUserOnlineStatus(ctx, in, opts...)
+}
+
+func (m *defaultUsercenter) GetOnlineUser(ctx context.Context, in *GetOnlineUserReq, opts ...grpc.CallOption) (*GetOnlineUserResp, error) {
+	client := pb.NewUsercenterClient(m.cli.Conn())
+	return client.GetOnlineUser(ctx, in, opts...)
 }

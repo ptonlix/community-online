@@ -44,7 +44,6 @@ func (l *GetMsgCodeLogic) selectSmsClient(option string, in *pb.GetMsgCodeReq) (
 
 	var randCode string = fmt.Sprintf("%06v", rand.New(rand.NewSource(time.Now().UnixNano())).Int31n(1000000))
 	var client SmsClient
-
 	switch option {
 	case "tencent":
 		templateSet := []string{randCode, strconv.Itoa(globalkey.CacheSmsPhoneKeyExp / 60)}

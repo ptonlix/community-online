@@ -131,6 +131,18 @@ message DeleteUserResp {
 
 }
 
+message FreshUserOnlineStatusReq {
+  int64 userId = 1;
+}
+message FreshUserOnlineStatusResp {
+}
+
+message GetOnlineUserReq {
+}
+message GetOnlineUserResp {
+  repeated int64 onlineUser = 1; 
+}
+
 //service
 service usercenter {
   rpc login(LoginReq) returns(LoginResp);
@@ -145,4 +157,6 @@ service usercenter {
   rpc ChanegPwd(ChangePwdReq) returns(ChangePwdResp);
   rpc UpdateUser(UpdateUserReq) returns(UpdateUserResp);
   rpc DeleteUser(DeleteUserReq) returns(DeleteUserResp);
+  rpc FreshUserOnlineStatus(FreshUserOnlineStatusReq) returns(FreshUserOnlineStatusResp);
+  rpc GetOnlineUser(GetOnlineUserReq) returns(GetOnlineUserResp);
 }

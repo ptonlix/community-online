@@ -121,8 +121,15 @@ type (
 		Info     string `json:"info"`
 	}
 )
+
 type (
 	DeleteUserReq {
 		Id int64 `json:"id"`
+	}
+)
+
+type (
+	GetOnlineUserResp {
+		OnlineUser []int64 `json:"onlineUser"`
 	}
 )

@@ -81,3 +81,13 @@ func (s *UsercenterServer) DeleteUser(ctx context.Context, in *pb.DeleteUserReq)
 	l := logic.NewDeleteUserLogic(ctx, s.svcCtx)
 	return l.DeleteUser(in)
 }
+
+func (s *UsercenterServer) FreshUserOnlineStatus(ctx context.Context, in *pb.FreshUserOnlineStatusReq) (*pb.FreshUserOnlineStatusResp, error) {
+	l := logic.NewFreshUserOnlineStatusLogic(ctx, s.svcCtx)
+	return l.FreshUserOnlineStatus(in)
+}
+
+func (s *UsercenterServer) GetOnlineUser(ctx context.Context, in *pb.GetOnlineUserReq) (*pb.GetOnlineUserResp, error) {
+	l := logic.NewGetOnlineUserLogic(ctx, s.svcCtx)
+	return l.GetOnlineUser(in)
+}
